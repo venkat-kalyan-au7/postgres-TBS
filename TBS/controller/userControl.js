@@ -2,7 +2,7 @@ const db = require('../models/userModel')
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const jwt_strategy = require('../config/jwt-strategy');
-
+import train from "../models/trainModel"
 const strategy = jwt_strategy.strategy;
 const jwtOptions = jwt_strategy.jwtOptions;
 
@@ -37,3 +37,37 @@ module.exports.login = async function(req,res){
     }
 
 }
+
+
+//user can see all the trains
+
+exports.allTrains=function(req,res){
+  const trainNumber =req.query.trainNumber
+  var condition =trainNumber
+
+  train.findAll({where:condition})
+  .then((data)=>{
+    res.send(data)
+  })
+  .catch((err)=>{
+    res.send(err)
+  })
+
+
+}
+
+exports.byTrainNumber = function(req,res){
+  const trainNumber = req.body.trainNumber
+  train.findOne({
+      where:{
+          trainNumber:trainNumber
+      }
+  })
+  .then((data)=>{
+    res.send(data)
+  })
+  .catch((err)=>{
+    res.send(err)
+  })
+}
+

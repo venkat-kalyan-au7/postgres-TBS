@@ -4,12 +4,15 @@ const router = express.Router()
 
 import adminControl from "../controller/adminControl"
 import trainControl from "../controller/trainControl"
+
+
 //register for admin
 router.post('/register',adminControl.register)
 
 
 //login for admin
 router.post('/login',adminControl.login)
+
 
 
 //add train
@@ -29,6 +32,7 @@ router.get('/trains',passport.authenticate('jwt',{
 router.put('/update',passport.authenticate('jwt',{
   session:false
 }),trainControl.updateTrainDetails)
+
 
 //delete train schedule
 

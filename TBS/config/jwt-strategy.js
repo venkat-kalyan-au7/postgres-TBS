@@ -14,7 +14,8 @@ const strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
   console.log('payload received', jwt_payload);
   let user = db.getUser({ id: jwt_payload.id });
   console.log(user);
-
+  // let user = {name:'piyush',password:'test',id:'123'};
+  // let user = null;
   if (user) {
     next(null, user);
   } else {

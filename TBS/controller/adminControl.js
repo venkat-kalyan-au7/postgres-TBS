@@ -18,7 +18,7 @@ module.exports.register = function(req,res){
 
 module.exports.login = async function(req,res){
     const { email, password } = req.body;
-    console.log(req.body);
+    
     if (email && password) {
       let user = await db.getUser({ email: email });
     
@@ -26,11 +26,12 @@ module.exports.login = async function(req,res){
         res.status(401).json({ message: 'No such user found' });
       }
       if (password === password) {
-        console.log(user.password)
+      
         // from now on we'll identify the user by the id and the id is the 
         // only personalized value that goes into our token
         let payload = { id: user.id };
         let token = jwt.sign(payload, jwtOptions.secretOrKey);
+        console.log(payload)
         res.json({ msg: 'Login Sucessful', token: token });
       } else {
         res.status(401).json({ msg: 'Password is incorrect' });
@@ -38,3 +39,5 @@ module.exports.login = async function(req,res){
     }
 
 }
+
+
