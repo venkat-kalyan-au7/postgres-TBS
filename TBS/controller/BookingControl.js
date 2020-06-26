@@ -25,7 +25,7 @@ module.exports.bookTicket = function(req,res){
             service:'gmail',
             auth:{
                 user:'kalyan15meka@gmail.com',
-                pass:'kalyansai392'   ///add your email and password here
+                pass:'*******'   ///add your email and password here
             }
         });
         var mailOptions = {
