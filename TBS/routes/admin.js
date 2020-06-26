@@ -40,6 +40,11 @@ router.delete('/cancel',passport.authenticate('jwt',{
   session:false
 }),trainControl.cancelTrain)
 
+//cancel tickets for cancelled trains
+router.delete('/tc',passport.authenticate('jwt',{
+  session:false
+}),trainControl.cancelTicket)
+
 
 
 

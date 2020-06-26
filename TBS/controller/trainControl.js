@@ -2,6 +2,7 @@ import train from "../models/trainModel"
 import db from "../config/database"
 import Sequelize from "sequelize"
 import noOfSeats from "../helpers/seatCount"
+import tickets from "../models/bookingModel"
 const Op = db.Sequelize.Op
 
 exports.addTrain = function(req,res){
@@ -61,13 +62,30 @@ exports.updateTrainDetails = function(req,res){
 }
 
 exports.cancelTrain = function(req,res){
-  const id = req.body.id
+  const trainNumber = req.body.trainNumber
   train.destroy({
-    where:{id:id}
+    where:{trainNumber:trainNumber}
   })
   .then(()=>{
     res.json({
       message:"Train cancelled"
+    })
+  })
+  .catch(()=>{
+    res.send("failed")
+  })
+}
+
+
+
+exports.cancelTicket= function(req,res){
+  const trainNumber=req.body.trainNumber
+  tickets.destroy({
+    where:{trainNumber:trainNumber}
+  })
+  .then(()=>{
+    res.json({
+      message:"tickets cancelled"
     })
   })
   .catch(()=>{

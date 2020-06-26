@@ -28,6 +28,10 @@ const bookingSchema = ({
     seatNumber:{
         type:Sequelize.INTEGER,
         allowNull:false
+    },
+    aadharImage:{
+        type:Sequelize.STRING,
+        allowNull:false
     }
 
 })

@@ -4,7 +4,7 @@ const router = express.Router()
 
 import userControl from "../controller/userControl"
 import bookingControl from "../controller/BookingControl"
-
+import uploads from "../helpers/imageupload"
 //user registration
 router.post('/register',userControl.register)
 
@@ -13,9 +13,11 @@ router.post('/register',userControl.register)
 router.post('/login',userControl.login)
 
 //ticket booking
-router.post('/book',passport.authenticate('jwt',{
+router.post('/book',uploads.uploads.single("file"),passport.authenticate('jwt',{
     session:false
-}),bookingControl.bookTicket)
+}),(req,res)=>{
+    return bookingControl.bookTicket(req,res)
+})
 
 //get ticket by pnr number
 router.get('/pnr',passport.authenticate('jwt',{
